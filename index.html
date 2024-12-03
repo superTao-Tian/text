@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<style>
+  *{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  a{
+    text-decoration: none;
+    color: white;
+  }
+  ul li{
+    list-style: none;
+  }
+  .head{
+    width: 100%;
+    background-image: url(./雷电将军.jpg);
+    background-repeat: no-repeat;
+    background-size: cover  ;
+    background-position: center center;
+  }
+  .nav{
+    margin: auto;
+    display: flex;
+    position: relative;
+    width: 800px;
+    height: 300px;
+    justify-content: center;
+    color: white;
+  }
+  .nav a{
+    display: block;
+    margin-top: 100px;
+    margin-right: 10px;
+    width: 100px;
+    height: 60px;
+    text-align: center;
+    line-height: 60px;
+    background-color: rgba(128, 128, 128,0.8);
+  }
+  .time{
+    position: fixed;
+    right: 0;
+    top: 0;
+    background-color:rgba(0,0,0,0.5);
+    color: white;
+    width: 300px;
+    text-align: center;
+  }
+  .huadong{
+    position: absolute;
+    height: 5px;
+    width: 100px;
+    left: 180px;
+    background-color: skyblue;
+    transition: all .3s;
+  }
+  .flower,.river,.mountain,.sky{
+    display: flex;
+    height: 1000px;
+    transition: all .3s;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+  }
+  .flower{
+   background-image: url(./flower.png);
+  }
+  .river{
+    background-image: url(./river.jpg);
+  }
+  .mountain{
+   background-image: url(./mountain.png);
+  }
+  .sky{
+    background-image: url(./sky.png);
+  }
+  .tiao ul{
+    display: none;
+    position: fixed;
+    top: 200px;
+    right:120px;
+    z-index: 1;
+  }
+  .tiao li{
+    display: block;
+    width: 80px;
+    height: 40px;
+    text-align: center;
+    line-height: 40px;
+    background-color: rgba(255,255,255,0.5);
+  }
+  .tiao li:hover,.tiao a:hover{
+    background-color: orange;
+    color: white!important;
+  }
+  .tiao li a {
+    text-decoration: none;
+    color: black;
+  }
+</style>
+<body>
+  <div class="head">
+    <div class="nav">
+      <a href="#">
+        首页
+        <div class="huadong"></div>
+      </a>
+      <a href="#">旅游景点</a>
+      <a href="#">热门组团</a>
+      <a href="#">个人中心</a>
+    </div>
+  </div>
+  <div class="time"></div>
+  <div class="flower">
+  </div>
+  <div class="river">
+  </div>
+  <div class="mountain">
+  </div>
+  <div class="sky">
+  </div>
+  <div class="tiao">
+    <ul>
+      <li class="goToFlower">花儿</li>
+      <li class="goToRiver">河流</li>
+      <li class="goToMountain">高山</li>
+      <li class="goToSky">天空</li>
+      <li class="returnTop">返回顶部</li>
+    </ul>
+  </div>
+
+<script>
+  const ul = document.querySelector('.tiao ul')
+  const flower = document.querySelector('.flower')
+  const river = document.querySelector('.river')
+  const mountain = document.querySelector('.mountain')
+  const sky = document.querySelector('.sky')
+  const gtflower = document.querySelector('.goToFlower');
+  const gtriver = document.querySelector('.goToRiver')
+  const gtmountain = document.querySelector('.goToMountain')
+  const gtsky = document.querySelector('.goToSky')
+  const back = document.querySelector('.returnTop')
+
+  window.addEventListener('scroll',function(){
+    const n = document.documentElement.scrollTop
+    if(n < flower.offsetTop){
+      ul.style.display = 'none'
+    }else{
+      ul.style.display = 'block'
+    }
+  })
+
+ 
+// console.log(flower);
+// console.log(river);
+// console.log(mountain);
+// console.log(sky);
+// console.log(back);
+console.log(flower.offsetTop);
+
+gtflower.addEventListener('click',function(){
+  window.scrollTo({
+    top: flower.offsetTop,
+    behavior: 'smooth'
+  });
+  
+})
+gtriver.addEventListener('click',function(){
+  window.scrollTo({
+    top: river.offsetTop,
+    behavior: 'smooth'
+  });
+})
+gtmountain.addEventListener('click',function(){
+  window.scrollTo({
+    top: mountain.offsetTop,
+    behavior: 'smooth'
+  });
+})
+gtsky.addEventListener('click',function(){
+  window.scrollTo({
+    top: sky.offsetTop,
+    behavior: 'smooth'
+  });
+})
+back.addEventListener('click',function(){
+  window.scrollTo({
+    top: 0,
+    behavior: 'smooth'
+  });
+})
+const hua = document.querySelector('.huadong')
+// console.log(hua);
+const nav = document.querySelector('.nav')
+// console.log(nav);
+
+nav.addEventListener('click',function(e){
+  if(e.target.tagName === 'A'){
+    hua.style.left = `${e.target.offsetLeft}px`
+  }
+})
+
+
+const time = document.querySelector('.time')   
+    function getTime(){
+      const date = new Date()
+      let h = date.getHours()
+      let m = date.getMinutes()
+      let s = date.getSeconds()
+      h = h < 10 ? '0'+ h : h
+      m = m < 10 ? '0'+ m : m
+      s = s < 10 ? '0'+ s : s
+      time.innerHTML = `
+      <h1>${date.getFullYear()}年${date.getMonth()+1}月${date.getDate()}日</h1>
+      <h3>${h}：${m}：${s}</h3> 
+      `
+    }
+     getTime()
+    setInterval(getTime,1000)
+</script>
+</body>
+</html>
